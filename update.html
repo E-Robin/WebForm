@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://kit.fontawesome.com/3f7c31d0ad.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./views/update.css"> 
+</head>
+
+<body>
+    <div class="header"><img src="./views/logo.png" alt="logo">  <div class="navbar">
+        <ul>
+            <li class="navbar">     <a  class="navbar" href="./home.html">Home</a>     </li>
+            <li class="navbar">   <a   style="color:red" class="navbar" href="/update.html">contact</a>  </li>
+            <li class="navbar">   <a  class="navbar" href="./dashboard.html">Dashboard</a> </li>
+        </ul>
+   
+   
+       </div> </div>
+    <div class="container">
+       <div class="block">
+       <div class="sec"><i class="fas fa-user-tie"></i>  <div  style="display: inline;" id="usrname">  </div> </div>
+       <div class="sec1">
+           <div class="item"> <a href="./dashboard.html">Employes</a></div>
+           <div class="item">Setting</div>
+           <div class="item">personalisation</div>
+           
+           <button class="item" id="logoutbtn"> Logout</button>
+           <div class="item">   <a href="./register.html">Register</a></div>
+           <div class="item">Media</div>
+           <div class="item"> <a href="./home.html">Aboutus</a></div>
+       </div>
+
+       </div>
+       <div class="block1"><div class="section"  id="head1" ><h1>hey User! welcome to the Dashboard</h1>
+        <div class="details">
+            <div class="item4" id="num">8057289176</div>
+            <div class="item4" id="email"></div>
+        </div>
+       
+    </div>
+       <div class="section" id="section">
+           
+            <h2> GROW YOUR BUSINESS WITH US</h2>
+            <!-- <div class="con">
+            <p>Delivering great digital experiences through high quality design, deployment, and management of websites, our solutions guarantee an accelerated ROI and faster outreach.
+            Hire Full Time Remote Developers
+            Mobile Responsive Websites
+            Experts in Frontend, Backend and API Development</p></div> -->
+            <!-- <hr> -->
+            <div class="contact">
+                <div class="item1">
+                   Name-   <div  style="display: inline;" id="robi"> Robin </div>
+                   <input type="text" name="update"  id="updates" placeholder="Edit name">
+                 <button onclick="update()">update</button>
+                </div>
+                <div class="item1"> Mobile -   <div  style="display: inline;" id="num">8057289176</div>    
+                    <input type="number" name="number" id="updateNumber" placeholder="Edit number">
+                  <button onclick="update1()" >update</button></div>
+                <div class="item1"> Email - <div  style="display: inline;" id="email1">grobin578@gmail.com </div>   
+                    <input type="email" name="email" id="updateEmail" placeholder="Edit email">
+                  <button  onclick="update3()" >update</button></div>
+               
+                
+                    
+                </div>
+                
+            </div>
+
+           
+        </div> 
+    </div>
+    <!-- <script src="/script.js"></script> -->
+</body>
+
+<script type="module" >
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyAaoCTb0MpFa9zmcfsdbMbNfaxsobQZO9w",
+    authDomain: "webdev-2d433.firebaseapp.com",
+    databaseURL: "https://webdev-2d433-default-rtdb.firebaseio.com",
+    projectId: "webdev-2d433",
+    storageBucket: "webdev-2d433.appspot.com",
+    messagingSenderId: "354502444257",
+    appId: "1:354502444257:web:19bd6c4767dd7156f8a3a0",
+    measurementId: "G-10M78B5HPP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth() ;
+  const database = getDatabase(app);
+
+//Managing logged in user
+  const user = auth.currentUser;
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    //alert("user is signed in");
+    document.getElementById("usrname").innerText = user.email  ;
+    document.getElementById("email").innerText = user.email  ;
+    const uid = user.email ;
+    console.log(user);
+    //alert(user) ;
+  } else {
+    alert("User is signed out") ;
+  }
+});
+
+//Logging out user
+
+const logout = document.getElementById("logoutbtn") ;
+
+logout.addEventListener('click',(e)=>{
+
+signOut(auth).then(() => {
+  // Sign-out successful.
+  alert('user logged out');
+  window.location.href = "index.html";
+}).catch((error) => {
+  // An error happened.
+  const errorCode = error.code;
+  const errorMessage = error.message;
+
+     alert(errorMessage);
+});
+
+});
+
+  
+      </script>
+</html>

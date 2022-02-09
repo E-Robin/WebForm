@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./views/style.css">
+    <script src="https://kit.fontawesome.com/3f7c31d0ad.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="head"><img src="./views/logo.png" alt="logo"></div>
+        <div class="content"><h2>Login</h2></div>
+     <div class="content">
+       <i class="fas fa-user"></i>  
+      <input type="name" id="userName"  placeholder="Name">
+     </div>
+     <div class="content">
+         <i class="fas fa-envelope"></i>
+        <input type="email" id="userMail"  placeholder="email">
+       </div>
+       <div class="content">
+        <i class="fas fa-key"></i> 
+        <input type="password" id="userPassword" name="password" placeholder="Password">
+       </div>
+       
+       <button class="btn" id="loginbtn">Login</button>
+       <!-- <button class="btn"  type="button"  onclick="myfunction()" >Login</button>  -->
+       <div class="cont">OR</div>
+       <button class="btn" id="submitBtn" >Register</button>
+       
+
+    
+     <!-- <script src="./script.js"></script> -->
+
+</body>
+<script type="module" >
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyAaoCTb0MpFa9zmcfsdbMbNfaxsobQZO9w",
+    authDomain: "webdev-2d433.firebaseapp.com",
+    databaseURL: "https://webdev-2d433-default-rtdb.firebaseio.com",
+    projectId: "webdev-2d433",
+    storageBucket: "webdev-2d433.appspot.com",
+    messagingSenderId: "354502444257",
+    appId: "1:354502444257:web:19bd6c4767dd7156f8a3a0",
+    measurementId: "G-10M78B5HPP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth() ;
+  const database = getDatabase(app);
+
+// Sign Up new user in firebase
+const  username=document.getElementById("userName");
+const  pass=document.getElementById("userPassword");
+const  usermail=document.getElementById("userMail");
+//const  usernumber=document.getElementById("numberInp");
+const submit=document.getElementById('submitBtn');
+var login = document.getElementById("loginbtn") ;
+
+submit.addEventListener('click', (e)=>{
+  console.log("Registration Started");
+createUserWithEmailAndPassword(auth, usermail.value, pass.value)
+  .then((userCredential) => {
+    // Signed in 
+    e.preventDefault();
+    const user = userCredential.user;
+    set(ref(database, 'users/' + user.uid),{
+          username: username.value,
+          email: usermail.value
+      })
+
+    alert('User created') ;
+    console.log('User created') ;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode) ;
+    console.log(errorMessage) ;
+    alert(errorMessage);
+    // ..
+  });
+})
+
+  //Login user 
+  
+  login.addEventListener('click',(e)=>{
+  
+      signInWithEmailAndPassword(auth, usermail.value , pass.value)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+
+        const dt = new Date();
+         update(ref(database, 'users/' + user.uid),{
+          last_login: dt,
+        })
+
+         alert('User loged in!');
+         window.location.href="dashboard.html"
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(errorMessage);
+  });
+
+ } )
+
+ const user = auth.currentUser;
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    alert("user is signed in");
+    const uid = user.uid;
+    //bla bla bla
+    // ...
+  } else {
+    alert("User is signed out") ;
+    // ...
+    //bla bla bla
+  }
+});
+
+  
+      </script>
+</html>
+

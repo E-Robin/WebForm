@@ -1,0 +1,124 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+body{
+    max-width: 100wh;
+    min-height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1643818541854-7c157173aa2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=449&q=80");
+    background-repeat:repeat-y;
+    background-size: cover;
+    
+    /* background-color:#a7dbe3; */
+    text-align: center;
+    /* align-items: center;
+    justify-content: center; */
+}
+form{
+    margin:auto;
+    /* margin-top:100px; */
+    
+    max-width:400px;
+    
+    background-color: blanchedalmond;
+    opacity: 72%;
+    padding: 15px;
+   
+    
+    /* border:1px solid rgb(22, 21, 21); */
+}
+div.form{
+    margin:auto;
+    /* margin-top:100px; */
+    
+    max-width:400px;
+    
+    background-color: blanchedalmond;
+    opacity: 72%;
+    padding: 15px;
+   
+    
+    /* border:1px solid rgb(22, 21, 21); */
+}
+
+input{
+
+    padding:7px 10px;
+    margin:2px;
+    font-size: large;
+    outline: none;
+    border-radius:5px;
+    border-style: hidden;
+    background-color: rgb(173, 228, 222);
+    
+    
+}
+div.content{
+    /* background-color: turquoise; */
+
+    max-width: 300px;
+    border-bottom: 2px solid turquoise;
+    margin:5px auto;
+    padding: 3px 5px;
+    border-radius:3px;
+
+}
+
+i{
+    font-size:x-large;
+    padding:3px;
+    padding-right: 5px;
+}
+.btn{
+    
+    padding: 2px 12px;
+    font-size:large;
+    margin:5px 0;
+    border-radius:4px;
+    cursor: pointer;
+}
+div.head{
+    border: 2px solid rgb(177, 25, 25);
+   
+    background-color: snow;
+    background-color: black;
+    opacity: 90%;
+    margin-bottom: 40px;
+    
+    
+    
+    
+
+}
+.btn a{
+    text-decoration: none;
+    color: black;
+}
+.head img{
+    height: 60px;
+    margin: auto;
+}
+
+@media screen and (max-width:400px) {
+    div.content{
+        display: block;
+        width: auto;     
+        text-align: center;
+    }
+
+    i{
+        margin:0px 20px;
+       padding: 0px 15px;
+      
+    }
+
+     input{
+        
+         text-align: center;
+         width: auto;
+         padding:5px 5px;
+     }
+    
+    
+}
